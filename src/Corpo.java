@@ -105,5 +105,3 @@ public class Corpo {
         satelliti[satelliti.length] = satellite;
     }
 }
-
-// questo è un commento di prova
