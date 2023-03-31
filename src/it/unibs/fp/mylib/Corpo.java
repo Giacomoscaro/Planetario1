@@ -1,3 +1,5 @@
+package it.unibs.fp.mylib;
+
 public class Corpo {
 
     private String nome;
