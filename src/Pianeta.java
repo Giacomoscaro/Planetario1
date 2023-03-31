@@ -1,4 +1,5 @@
-public class Pianeta extends Corpo{
+
+public class Pianeta extends Corpo {
 
     public Pianeta(String nome, Posizione posizione, double massa, double raggio_orbita, double raggio_corpo, Corpo padre) {
         super(nome, posizione, massa, raggio_orbita, raggio_corpo, padre);

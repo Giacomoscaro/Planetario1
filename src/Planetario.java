@@ -1,4 +1,5 @@
 import it.unibs.fp.mylib.InputDati;
+import it.kibo.fp.lib.InputData;
 
 import java.util.ArrayList;
 
@@ -6,7 +7,7 @@ public class Planetario {
     private ArrayList<Corpo> lista_corpi;
     private String nome_sistema;
     public Planetario(){
-        System.out.println("Crea nuovo Planetario");
+        System.out.println("Crea nuovo it.unibs.fp.mylib.Planetario");
         creaStella();
     }
     public void creaStella(){

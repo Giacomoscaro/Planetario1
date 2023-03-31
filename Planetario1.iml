@@ -8,5 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="UniBSFpLib" level="project" />
+    <orderEntry type="library" name="KiboUniBSFpLib-main" level="application" />
+    <orderEntry type="library" name="kibofplib-1.0" level="project" />
+    <orderEntry type="library" name="mylib" level="project" />
   </component>
 </module>

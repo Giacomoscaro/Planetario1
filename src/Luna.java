@@ -1,3 +1,4 @@
+
 public class Luna extends Corpo {
 
     public Luna(String nome, Posizione posizione, double massa, double raggio_orbita, double raggio_corpo, Corpo padre) {

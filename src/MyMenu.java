@@ -1,3 +1,4 @@
+
 import it.unibs.fp.mylib.InputDati;
 
 public class MyMenu {
@@ -8,7 +9,7 @@ public class MyMenu {
         Double massa = InputDati.leggiDouble("Inserire massa: ");
         Double raggio_orbita = InputDati.leggiDouble("Raggio orbita: ");
         Double raggio_corpo = InputDati.leggiDouble("Raggio del corpo: ");
-         //InputDati.leggiStringaNonVuota("Inserisci Pianeta madre: ");
+         //InputDati.leggiStringaNonVuota("Inserisci it.unibs.fp.mylib.Pianeta madre: ");
         return new Corpo(nome, massa,raggio_corpo);
     }
 }
