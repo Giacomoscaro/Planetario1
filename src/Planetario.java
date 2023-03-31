@@ -1,4 +1,4 @@
-import it.unibs.fp.mylib.InputDati;
+import it.kibo.fp.lib.*;
 
 import java.util.ArrayList;
 
@@ -10,9 +10,9 @@ public class Planetario {
         creaStella();
     }
     public void creaStella(){
-        String nome = InputDati.leggiStringaNonVuota("nome:");
-        Double massa = InputDati.leggiDouble("massa:");
-        Double raggio_corpo = InputDati.leggiDouble("raggio corpo: ");
+        String nome = InputData.readNonEmptyString("nome:", true);
+        Double massa = InputData.readDouble("massa:");
+        Double raggio_corpo = InputData.readDouble("raggio corpo: ");
         Stella stella = new Stella(nome , massa, raggio_corpo);
 	lista_corpi = new ArrayList<Corpo>();
         lista_corpi.add(stella);

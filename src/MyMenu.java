@@ -1,15 +1,15 @@
 
-import it.unibs.fp.mylib.InputDati;
+import it.kibo.fp.lib.*;
 
 public class MyMenu {
     //metodo crea Corpi
     public Corpo creaCorpo(){
-        String nome = InputDati.leggiStringaNonVuota("Inserire un nome per il corpo: ");
-        Posizione pos = new Posizione( InputDati.leggiDouble("Inserire x:"), InputDati.leggiDouble("Inserisci y: "));
-        Double massa = InputDati.leggiDouble("Inserire massa: ");
-        Double raggio_orbita = InputDati.leggiDouble("Raggio orbita: ");
-        Double raggio_corpo = InputDati.leggiDouble("Raggio del corpo: ");
-         //InputDati.leggiStringaNonVuota("Inserisci it.unibs.fp.mylib.Pianeta madre: ");
+        String nome = InputData.readNonEmptyString("Inserire un nome per il corpo: ", true);
+        Posizione pos = new Posizione( InputData.readDouble("Inserire x:"), InputData.readDouble("Inserisci y: "));
+        Double massa = InputData.readDouble("Inserire massa: ");
+        Double raggio_orbita = InputData.readDouble("Raggio orbita: ");
+        Double raggio_corpo = InputData.readDouble("Raggio del corpo: ");
+        InputData.readNonEmptyString("Inserisci it.unibs.fp.mylib.Pianeta madre: ", true);
         return new Corpo(nome, massa,raggio_corpo);
     }
 }
