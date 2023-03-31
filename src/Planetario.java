@@ -1,5 +1,4 @@
 import it.unibs.fp.mylib.InputDati;
-import it.kibo.fp.lib.InputData;
 
 import java.util.ArrayList;
 
@@ -15,6 +14,7 @@ public class Planetario {
         Double massa = InputDati.leggiDouble("massa:");
         Double raggio_corpo = InputDati.leggiDouble("raggio corpo: ");
         Stella stella = new Stella(nome , massa, raggio_corpo);
+	lista_corpi = new ArrayList<Corpo>();
         lista_corpi.add(stella);
     }
     public String getNome_sistema() {
