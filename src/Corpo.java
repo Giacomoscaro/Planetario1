@@ -11,16 +11,15 @@ public class Corpo {
     private static int contatore;
     private Posizione posizione_relativa;
 
-    //pianeta:
-    public Corpo(String nome, Posizione posizione, double massa, double raggio_orbita, double raggio_corpo, Corpo padre) {
+    //costruttore per un pianeta o una luna:
+    public Corpo(String nome, Posizione posizione, double massa, double raggio_corpo, Corpo padre) {
         this.nome = nome;
         this.posizione = posizione;
         this.massa = massa;
-        this.raggio_orbita = raggio_orbita;
         this.raggio_corpo = raggio_corpo;
         this.padre = padre;
     }
-    //stella:
+    //costruttore per la stella:
     public Corpo(String nome, double massa, double raggio_corpo) {
         this.nome = nome;
         this.massa = massa;
