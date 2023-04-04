@@ -25,9 +25,17 @@ public class Planetario {
         Double raggio_corpo = InputData.readDoubleWithMinimum("raggio pianeta: ", 0);
         Corpo padre = lista_corpi.get(0);
         Pianeta pianeta = new Pianeta(nome, posizione, massa, raggio_corpo, padre);
+        lista_corpi.add(pianeta);
     }
 
-
+    public void stampa_pianeti(){
+        //serve per avere una lista dei pianeti per scegliere il corpo padre di una luna
+        for(int i = 0; i< lista_corpi.size(); i++){
+            if(lista_corpi.get(i).getClass() == Pianeta.class){
+                System.out.println(lista_corpi.get(i).getNome() + "\n");
+            }
+        }
+    }
 
     public String getNome_sistema() {
         return nome_sistema;
