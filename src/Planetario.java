@@ -37,6 +37,30 @@ public class Planetario {
         }
     }
 
+    public Corpo toCorpo(String nome){
+        //serve per avere subito il corpo corrispondente a un nome
+        Corpo c=null;
+        for(int i=0; i<lista_corpi.size(); i++){
+            if(lista_corpi.get(i).getNome().equals(nome)){
+                c=lista_corpi.get(i);
+            }
+        }
+        return c;
+    }
+
+    public void creaLuna(){
+        String nome = InputData.readNonEmptyString("nome:", true);
+        Posizione posizione = new Posizione(InputData.readDouble("inserire x:"), InputData.readDouble("inserire y:"));
+        Double massa = InputData.readDoubleWithMinimum("massa:", 0);
+        Double raggio_corpo = InputData.readDoubleWithMinimum("raggio luna: ", 0);
+        stampa_pianeti();
+        String nome_padre = InputData.readNonEmptyString("Scegli il pianeta padre dalla lista:", true);
+        Corpo padre = toCorpo(nome_padre);
+        Luna luna = new Luna(nome, posizione, massa, raggio_corpo, padre);
+        lista_corpi.add(luna);
+    }
+
+
     public String getNome_sistema() {
         return nome_sistema;
     }
