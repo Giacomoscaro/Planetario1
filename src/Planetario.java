@@ -9,6 +9,14 @@ public class Planetario {
         System.out.println("Crea nuovo it.unibs.fp.mylib.Planetario");
 
     }
+
+    public String getNome_sistema() {
+        return nome_sistema;
+    }
+
+    public void setNome_sistema(String nome_sistema) {
+        this.nome_sistema = nome_sistema;
+    }
     public void creaStella(){
         String nome = InputData.readNonEmptyString("nome:", true);
         Double massa = InputData.readDoubleWithMinimum("massa:", 0);
@@ -26,6 +34,7 @@ public class Planetario {
         Corpo padre = lista_corpi.get(0);
         Pianeta pianeta = new Pianeta(nome, posizione, massa, raggio_corpo, padre);
         lista_corpi.add(pianeta);
+        lista_corpi.get(0).aggiungi_satellite(pianeta);
     }
 
     public void stampa_pianeti(){
@@ -58,14 +67,29 @@ public class Planetario {
         Corpo padre = toCorpo(nome_padre);
         Luna luna = new Luna(nome, posizione, massa, raggio_corpo, padre);
         lista_corpi.add(luna);
+        lista_corpi.get(lista_corpi.indexOf(padre)).aggiungi_satellite(luna);
     }
 
 
-    public String getNome_sistema() {
-        return nome_sistema;
+    public void rimuovi_stella(){
+        System.out.println("Hai deciso di rimuovere la stella dal tuo sistema solare, il che porterà ad una sua completa distruzione, addio " + this.getNome_sistema());
+        lista_corpi.clear();
     }
 
-    public void setNome_sistema(String nome_sistema) {
-        this.nome_sistema = nome_sistema;
+    public void rimuovi_pianeta(Pianeta pianeta){
+        for(int i=0; i<pianeta.getSatelliti().length; i++){
+            lista_corpi.remove(pianeta.getSatelliti()[i]);
+        }
+        lista_corpi.remove(pianeta);
     }
+
+    public void rimuovi_luna(Luna luna){
+        lista_corpi.remove(luna);
+        /*
+        per completare il metodo rimuovi_luna serve un
+        modo di rimuovere un corpo specifico da
+        satelliti[], ma non so quale
+         */
+    }
+
 }
