@@ -80,16 +80,13 @@ public class Planetario {
         for(int i=0; i<pianeta.getSatelliti().size(); i++){
             lista_corpi.remove(pianeta.getSatelliti().get(i));
         }
+        pianeta.getSatelliti().clear();
         lista_corpi.remove(pianeta);
     }
 
     public void rimuovi_luna(Luna luna){
         lista_corpi.remove(luna);
-        /*
-        per completare il metodo rimuovi_luna serve un
-        modo di rimuovere un corpo specifico da
-        satelliti[], ma non so quale
-         */
+        luna.getPadre().getSatelliti().remove(luna);
     }
 
 }

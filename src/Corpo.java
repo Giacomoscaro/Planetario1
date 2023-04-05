@@ -132,7 +132,7 @@ public class Corpo {
     /**
      * Sostituisce un satellite con un corpo indicato
      * 
-     * @param corpo	il corpo da inserire al posto di quello già presente
+     * @param _corpo	il corpo da inserire al posto di quello già presente
      * @param _id	l'indice del satellite da rimpiazzare
      */
     public void setSatellite(Corpo _corpo, int _id) {
