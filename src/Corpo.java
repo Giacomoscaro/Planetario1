@@ -1,15 +1,20 @@
+import java.util.ArrayList;
 
 public class Corpo {
 
+    private int id; //identificatore unico del corpo
     private String nome;
     private Posizione posizione;
     private double massa;
     private double raggio_orbita;
     private double raggio_corpo;
     private Corpo padre;
-    private Corpo[] satelliti;
-    private static int contatore;
+    private ArrayList<Corpo> satelliti;
     private Posizione posizione_relativa;
+    
+    
+    private static int contatore=0;
+    
 
     //costruttore per un pianeta o una luna:
     public Corpo(String nome, Posizione posizione, double massa, double raggio_corpo, Corpo padre) {
@@ -18,7 +23,15 @@ public class Corpo {
         this.massa = massa;
         this.raggio_corpo = raggio_corpo;
         this.padre = padre;
+        
+        /* ID del corpo
+         * si usa il valore corrente del contatore che viene poi incrementato
+         * in modo che i corpi creati successivamente abbiano sempre un id diverso
+         */
+        id = contatore;
+        id++;
     }
+    
     //costruttore per la stella:
     public Corpo(String nome, double massa, double raggio_corpo) {
         this.nome = nome;
@@ -27,7 +40,15 @@ public class Corpo {
         this.posizione = new Posizione(0,0);
         this.raggio_orbita = 0.0;
         this.padre = this;
+        
+        id = contatore;
+        id++;
     }
+    
+    public int getId() {
+    	return id;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -75,13 +96,52 @@ public class Corpo {
     public void setPadre(Corpo padre) {
         this.padre = padre;
     }
-
-    public Corpo[] getSatelliti() {
+    
+    /**
+     * Restituisce l'intera lista dei satelliti
+     */
+    public ArrayList<Corpo> getSatelliti() {
         return satelliti;
     }
 
-    public void setSatelliti(Corpo[] satelliti) {
+    /**
+     * Cambia la lista di satelliti con una data
+     * @param satelliti la nuova lista di satelliti
+     */
+    public void setSatelliti(ArrayList<Corpo> satelliti) {
         this.satelliti = satelliti;
+    }
+    
+    /** 
+     * Ritorna un satellite che ha l'id specificato
+     * 
+     * @param _id l'id del corpo da trovare
+     * @return	il satellite cercato
+     */
+    public Corpo getSatellite(int _id) {
+    	for(Corpo corpo : satelliti) {
+    		if(corpo.id ==_id)
+    			return corpo;
+    	}
+    	/* Ritornare null nel caso non trovi un corpo corrispondente
+    	 * Valutare se gestire questa cosa in modo diverso
+    	 */
+    	return null;
+    }
+    
+    /**
+     * Sostituisce un satellite con un corpo indicato
+     * 
+     * @param corpo	il corpo da inserire al posto di quello già presente
+     * @param _id	l'indice del satellite da rimpiazzare
+     */
+    public void setSatellite(Corpo _corpo, int _id) {
+    	for(Corpo corpo : satelliti)
+    		if(corpo.id == _id) {
+    			corpo = _corpo; // da controllare
+    			System.out.println("Sostituzione con il corpo -> id: " + corpo.id);
+    		}
+    	
     }
 
     public static int getContatore() {
@@ -101,6 +161,6 @@ public class Corpo {
     }
 
     public void aggiungi_satellite(Corpo satellite){
-        satelliti[satelliti.length] = satellite;
+        satelliti.add(satellite);
     }
 }

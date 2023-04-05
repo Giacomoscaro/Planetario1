@@ -77,8 +77,8 @@ public class Planetario {
     }
 
     public void rimuovi_pianeta(Pianeta pianeta){
-        for(int i=0; i<pianeta.getSatelliti().length; i++){
-            lista_corpi.remove(pianeta.getSatelliti()[i]);
+        for(int i=0; i<pianeta.getSatelliti().size(); i++){
+            lista_corpi.remove(pianeta.getSatelliti().get(i));
         }
         lista_corpi.remove(pianeta);
     }
