@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import it.kibo.fp.lib.AnsiColors;
+import it.kibo.fp.lib.PrettyStrings;
+
 public class Corpo {
 
     private int id; //identificatore unico del corpo
@@ -30,6 +33,9 @@ public class Corpo {
          */
         id = contatore;
         id++;
+        
+        //inizializzazione dell'arraylist dei satelliti
+        satelliti = new ArrayList<Corpo>();
     }
     
     //costruttore per la stella:
@@ -43,6 +49,8 @@ public class Corpo {
         
         id = contatore;
         id++;
+        
+        satelliti = new ArrayList<Corpo>();
     }
     
     public int getId() {
@@ -162,5 +170,31 @@ public class Corpo {
 
     public void aggiungi_satellite(Corpo satellite){
         satelliti.add(satellite);
+    }
+    
+    public String toString() {
+    	StringBuffer output= new StringBuffer();
+    	output.append("\t" + AnsiColors.WHITE + "CORPO" + AnsiColors.RESET + " \n\n");
+    	output.append("ID :\t" + id + "\n");
+    	output.append("Nome :\t" + nome + "\n");
+    	output.append("Posizione :\t" + posizione.toString() + "\n");
+    	output.append("Massa :\t\t" + massa + "\n");
+    	output.append("Raggio :\t\t" + raggio_corpo + "\n");
+    	output.append("Raggio orbitale :\t" + raggio_orbita + "\n");
+    	
+    	if(satelliti.isEmpty() == true) {
+    		output.append("Satelliti :\t" + "\n");
+    		for(Corpo satellite: satelliti)
+    			output.append("\t" + satellite.getNome() + " : " + satellite.getId() + "\n");
+    	
+    		output.append("\n");
+    	}
+    	
+    	if(padre != null)
+    		output.append("Satellite di :\t" + padre.getNome() + " : " + padre.getId() + "\n");
+    	
+    	output.append(PrettyStrings.repeatChar('-', 40) + "\n\n");
+    	
+    	return output.toString();
     }
 }

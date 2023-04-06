@@ -17,6 +17,13 @@ public class Planetario {
     public void setNome_sistema(String nome_sistema) {
         this.nome_sistema = nome_sistema;
     }
+    
+    public void stampa_lista_corpi() {
+    	for(Corpo corpo: lista_corpi) {
+    		System.out.print(corpo.toString());
+    	}
+    }
+    
     public void creaStella(){
         String nome = InputData.readNonEmptyString("nome:", true);
         Double massa = InputData.readDoubleWithMinimum("massa:", 0);

@@ -31,5 +31,9 @@ public class Posizione {
     public Posizione posizione_relativa(Posizione riferimento){
         return new Posizione(x-riferimento.getX(), y-riferimento.getY());
     }
+    
+    public String toString() {
+    	return "( " + x + " , " + y + " )";
+    }
 
 }
