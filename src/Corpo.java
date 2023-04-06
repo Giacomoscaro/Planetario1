@@ -32,7 +32,7 @@ public class Corpo {
          * in modo che i corpi creati successivamente abbiano sempre un id diverso
          */
         id = contatore;
-        id++;
+        contatore++;
         
         //inizializzazione dell'arraylist dei satelliti
         satelliti = new ArrayList<Corpo>();
@@ -48,7 +48,7 @@ public class Corpo {
         this.padre = this;
         
         id = contatore;
-        id++;
+        contatore++;
         
         satelliti = new ArrayList<Corpo>();
     }
@@ -172,6 +172,10 @@ public class Corpo {
         satelliti.add(satellite);
     }
     
+    /**
+     * Restituisce le informazioni di un corpo generico, l'elenco
+     * dei suoi satelliti (se ne ha) e il corpo padre
+     */
     public String toString() {
     	StringBuffer output= new StringBuffer();
     	output.append("\t" + AnsiColors.WHITE + "CORPO" + AnsiColors.RESET + " \n\n");
@@ -182,7 +186,7 @@ public class Corpo {
     	output.append("Raggio :\t\t" + raggio_corpo + "\n");
     	output.append("Raggio orbitale :\t" + raggio_orbita + "\n");
     	
-    	if(satelliti.isEmpty() == true) {
+    	if(satelliti.isEmpty() == false) {
     		output.append("Satelliti :\t" + "\n");
     		for(Corpo satellite: satelliti)
     			output.append("\t" + satellite.getNome() + " : " + satellite.getId() + "\n");
