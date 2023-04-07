@@ -3,11 +3,16 @@ import it.kibo.fp.lib.*;
 import java.util.ArrayList;
 
 public class Planetario {
-    private ArrayList<Corpo> lista_corpi = new ArrayList<Corpo>(10);;
+    private ArrayList<Corpo> lista_corpi = new ArrayList<Corpo>(10);
     private String nome_sistema;
-    public Planetario(){
-        System.out.println("Crea nuovo it.unibs.fp.mylib.Planetario");
+    public Planetario(String nome_sistema){
+    this.nome_sistema = nome_sistema;
+    }
 
+    public static Planetario crea_planetario(){
+        System.out.println("Crea un nuovo planetario\n");
+        String nome = InputData.readNonEmptyString("Inserire il nome: ", true);
+        return new Planetario(nome);
     }
 
     public String getNome_sistema() {
@@ -25,19 +30,19 @@ public class Planetario {
     }
     
     public void creaStella(){
-        String nome = InputData.readNonEmptyString("nome:", true);
-        Double massa = InputData.readDoubleWithMinimum("massa:", 0);
-        Double raggio_corpo = InputData.readDoubleWithMinimum("raggio stella: ", 0);
+        String nome = InputData.readNonEmptyString("nome stella:", true);
+        double massa = InputData.readDoubleWithMinimum("massa stella:", 0);
+        double raggio_corpo = InputData.readDoubleWithMinimum("raggio stella: ", 0);
         Stella stella = new Stella(nome , massa, raggio_corpo);
 	//lista_corpi = new ArrayList<Corpo>();
         lista_corpi.add(stella);
     }
 
     public void creaPianeta(){
-        String nome = InputData.readNonEmptyString("nome:", true);
+        String nome = InputData.readNonEmptyString("nome pianeta:", true);
         Posizione posizione = new Posizione(InputData.readDouble("inserire x:"), InputData.readDouble("inserire y:"));
-        Double massa = InputData.readDoubleWithMinimum("massa:", 0);
-        Double raggio_corpo = InputData.readDoubleWithMinimum("raggio pianeta: ", 0);
+        double massa = InputData.readDoubleWithMinimum("massa pianeta:", 0);
+        double raggio_corpo = InputData.readDoubleWithMinimum("raggio pianeta: ", 0);
         Corpo padre = lista_corpi.get(0);
         Pianeta pianeta = new Pianeta(nome, posizione, massa, raggio_corpo, padre);
         lista_corpi.add(pianeta);
@@ -46,9 +51,9 @@ public class Planetario {
 
     public void stampa_pianeti(){
         //serve per avere una lista dei pianeti per scegliere il corpo padre di una luna
-        for(int i = 0; i< lista_corpi.size(); i++){
-            if(lista_corpi.get(i).getClass() == Pianeta.class){
-                System.out.println(lista_corpi.get(i).getNome() + "\n");
+        for (Corpo corpo : lista_corpi) {
+            if (corpo.getClass() == Pianeta.class) {
+                System.out.println(corpo.getNome() + "\n");
             }
         }
     }
@@ -56,19 +61,19 @@ public class Planetario {
     public Corpo toCorpo(String nome){
         //serve per avere subito il corpo corrispondente a un nome
         Corpo c=null;
-        for(int i=0; i<lista_corpi.size(); i++){
-            if(lista_corpi.get(i).getNome().equals(nome)){
-                c=lista_corpi.get(i);
+        for (Corpo corpo : lista_corpi) {
+            if (corpo.getNome().equals(nome)) {
+                c = corpo;
             }
         }
         return c;
     }
 
     public void creaLuna(){
-        String nome = InputData.readNonEmptyString("nome:", true);
+        String nome = InputData.readNonEmptyString("nome luna:", true);
         Posizione posizione = new Posizione(InputData.readDouble("inserire x:"), InputData.readDouble("inserire y:"));
-        Double massa = InputData.readDoubleWithMinimum("massa:", 0);
-        Double raggio_corpo = InputData.readDoubleWithMinimum("raggio luna: ", 0);
+        double massa = InputData.readDoubleWithMinimum("massa luna:", 0);
+        double raggio_corpo = InputData.readDoubleWithMinimum("raggio luna: ", 0);
         stampa_pianeti();
         String nome_padre = InputData.readNonEmptyString("Scegli il pianeta padre dalla lista:", true);
         Corpo padre = toCorpo(nome_padre);
