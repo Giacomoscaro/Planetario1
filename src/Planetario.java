@@ -79,7 +79,7 @@ public class Planetario {
         double massa = InputData.readDoubleWithMinimum("massa luna:", 0);
         double raggio_corpo = InputData.readDoubleWithMinimum("raggio luna: ", 0);
         stampa_pianeti();
-        String nome_padre = InputData.readNonEmptyString("Scegli il pianeta padre dalla lista:", true);
+        String nome_padre = InputData.readNonEmptyString("Scegli il pianeta padre dalla lista: ", true);
         Corpo padre = toCorpo(nome_padre);
         Luna luna = new Luna(nome, posizione, massa, raggio_corpo, padre);
         lista_corpi.add(luna);
@@ -112,6 +112,16 @@ public class Planetario {
                 System.out.println(corpo.getNome() + "\n");
             }
         }
+    }
+
+    public void stampa_info_corpo(){
+        System.out.println("Scegli di quale corpo vedere le caratteristiche: ");
+        for(Corpo corpo : lista_corpi){
+            System.out.println(corpo.getNome() + "\n");
+        }
+        String nome = InputData.readNonEmptyString("\n>", true);
+        Corpo corpo = toCorpo(nome);
+        System.out.print(corpo.toString());
     }
 
 }
