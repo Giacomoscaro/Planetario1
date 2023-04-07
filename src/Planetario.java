@@ -15,6 +15,10 @@ public class Planetario {
         return new Planetario(nome);
     }
 
+    public ArrayList<Corpo> getLista_corpi() {
+        return lista_corpi;
+    }
+
     public String getNome_sistema() {
         return nome_sistema;
     }
@@ -82,7 +86,6 @@ public class Planetario {
         lista_corpi.get(lista_corpi.indexOf(padre)).aggiungi_satellite(luna);
     }
 
-
     public void rimuovi_stella(){
         System.out.println("Hai deciso di rimuovere la stella dal tuo sistema solare, il che porterà ad una sua completa distruzione, addio " + this.getNome_sistema());
         lista_corpi.clear();
@@ -93,12 +96,22 @@ public class Planetario {
             lista_corpi.remove(pianeta.getSatelliti().get(i));
         }
         pianeta.getSatelliti().clear();
+        pianeta.getPadre().getSatelliti().remove(pianeta);
         lista_corpi.remove(pianeta);
     }
 
     public void rimuovi_luna(Luna luna){
         lista_corpi.remove(luna);
         luna.getPadre().getSatelliti().remove(luna);
+    }
+
+    public void stampa_lune(){
+        //serve per avere una lista delle lune
+        for (Corpo corpo : lista_corpi) {
+            if (corpo.getClass() == Luna.class) {
+                System.out.println(corpo.getNome() + "\n");
+            }
+        }
     }
 
 }
