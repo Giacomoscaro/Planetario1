@@ -214,9 +214,13 @@ public class Corpo {
     	 * la distanza tra loro è minore o uguale alla somma dei raggi orbitali 
     	 * (e della somma dei raggi dei corpi)
     	 */
-    	if( Posizione.distanza(c1.posizione, c2.posizione) <= c1.raggio_orbita + c2.raggio_orbita + c1.raggio_corpo + c2.raggio_corpo )
-    			return true;
-    	else return false;
+        if( c1.getPadre().equals(c2.getPadre()))
+        {if( Math.abs( c1.getRaggio_orbita() - c2.getRaggio_orbita()) <= c1.getRaggio_corpo() + c2.getRaggio_corpo())
+                return true;}
+        else if( Posizione.distanza(c1.getPadre().getPosizione(), c2.getPadre().getPosizione()) <= c1.getRaggio_orbita() + c2.getRaggio_orbita() + c1.getRaggio_corpo() + c2.getRaggio_corpo() )
+        return true;
+
+        return false;
     }
     
     /**
@@ -230,7 +234,7 @@ public class Corpo {
     	 * Due corpi si sovrappongono se la distanza tra loro è
     	 * minore della somma dei loro raggi
     	 */
-    	if( Posizione.distanza(c1.posizione, c2.posizione) < c1.raggio_corpo + c2.raggio_corpo )
+    	if( Posizione.distanza(c1.getPosizione(), c2.getPosizione()) < c1.getRaggio_corpo() + c2.getRaggio_corpo() )
     		return true;
     	else return false;
     }
