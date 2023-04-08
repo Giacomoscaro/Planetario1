@@ -49,6 +49,17 @@ public class Planetario {
         double raggio_corpo = InputData.readDoubleWithMinimum("raggio pianeta: ", 0);
         Corpo padre = lista_corpi.get(0);
         Pianeta pianeta = new Pianeta(nome, posizione, massa, raggio_corpo, padre);
+        
+        /*
+         * Controllare che il pianeta non si sovrapponga ad altri corpi
+         *  e, nel caso, chiedere l'inserimento di una posizione valida
+         */
+        while(sovrapposto(pianeta)) {
+        	System.out.println(AnsiColors.RED + "Il pianeta si sovrappone con altri corpi, inserisci una posizione valida" + AnsiColors.RESET);
+        	posizione = new Posizione(InputData.readDouble("inserire x:"), InputData.readDouble("inserire y:"));
+        	pianeta.setPosizione(posizione);
+        }
+        
         lista_corpi.add(pianeta);
         lista_corpi.get(0).aggiungi_satellite(pianeta);
     }
@@ -82,6 +93,17 @@ public class Planetario {
         String nome_padre = InputData.readNonEmptyString("Scegli il pianeta padre dalla lista: ", true);
         Corpo padre = toCorpo(nome_padre);
         Luna luna = new Luna(nome, posizione, massa, raggio_corpo, padre);
+        
+        /*
+         * Controllare che la luna non si sovrapponga ad altri corpi
+         *  e, nel caso, chiedere l'inserimento di una posizione valida
+         */
+        while(sovrapposto(luna)) {
+        	System.out.println(AnsiColors.RED + "La luna si sovrappone con altri corpi, inserisci una posizione valida" + AnsiColors.RESET);
+        	posizione = new Posizione(InputData.readDouble("inserire x:"), InputData.readDouble("inserire y:"));
+        	luna.setPosizione(posizione);
+        }
+        
         lista_corpi.add(luna);
         lista_corpi.get(lista_corpi.indexOf(padre)).aggiungi_satellite(luna);
     }
@@ -123,5 +145,20 @@ public class Planetario {
         Corpo corpo = toCorpo(nome);
         System.out.print(corpo.toString());
     }
-
+    
+    /**
+     * Restituisce vero se il corpo indicato si sovrappone con un altro corpo
+     * della lista_corpi
+     * @return TRUE il corpo si sovrappone; FALSE il corpo non si sovrappone
+     */
+    public boolean sovrapposto(Corpo c) {
+    	boolean posizioneValida=false;
+        for(Corpo corpo : lista_corpi) {
+        	if( Corpo.sovrapposti(c, corpo) ) {
+        		posizioneValida=true;
+        		break;
+        	}
+        }
+        return posizioneValida;
+    }
 }

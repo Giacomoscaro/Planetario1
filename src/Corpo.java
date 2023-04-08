@@ -201,4 +201,37 @@ public class Corpo {
     	
     	return output.toString();
     }
+    
+    /**
+     *  Restituisce vero se i corpi in ingresso possono collidere
+     * @param c1 primo corpo
+     * @param c2 secondo corpo
+     * @return vero se i corpi possono collidere
+     */
+    public static boolean collidono(Corpo c1, Corpo c2) {
+    	/*
+    	 * Due corpi possono collidere se
+    	 * la distanza tra loro è minore o uguale alla somma dei raggi orbitali 
+    	 * (e della somma dei raggi dei corpi)
+    	 */
+    	if( Posizione.distanza(c1.posizione, c2.posizione) <= c1.raggio_orbita + c2.raggio_orbita + c1.raggio_corpo + c2.raggio_corpo )
+    			return true;
+    	else return false;
+    }
+    
+    /**
+     * Ritorna vero se i due corpi si sovrappongono
+     * @param c1 il primo corpo
+     * @param c2 il secondo corpo
+     * @return vero se i corpi si sovrappongono
+     */
+    public static boolean sovrapposti(Corpo c1, Corpo c2) {
+    	/**
+    	 * Due corpi si sovrappongono se la distanza tra loro è
+    	 * minore della somma dei loro raggi
+    	 */
+    	if( Posizione.distanza(c1.posizione, c2.posizione) < c1.raggio_corpo + c2.raggio_corpo )
+    		return true;
+    	else return false;
+    }
 }
