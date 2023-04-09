@@ -171,7 +171,13 @@ public class Corpo {
     public void aggiungi_satellite(Corpo satellite){
         satelliti.add(satellite);
     }
-    
+
+    public void visualizza_satelliti(){
+        for(Corpo corpo: satelliti){
+            System.out.println(corpo.toString());
+        }
+    }
+
     /**
      * Restituisce le informazioni di un corpo generico, l'elenco
      * dei suoi satelliti (se ne ha) e il corpo padre
@@ -186,7 +192,7 @@ public class Corpo {
     	output.append("Raggio :\t\t" + raggio_corpo + "\n");
     	output.append("Raggio orbitale :\t" + raggio_orbita + "\n");
     	
-    	if(satelliti.isEmpty() == false) {
+    	if(!satelliti.isEmpty()) {
     		output.append("Satelliti :\t" + "\n");
     		for(Corpo satellite: satelliti)
     			output.append("\t" + satellite.getNome() + " : " + satellite.getId() + "\n");
@@ -230,7 +236,7 @@ public class Corpo {
      * @return vero se i corpi si sovrappongono
      */
     public static boolean sovrapposti(Corpo c1, Corpo c2) {
-    	/**
+    	/*
     	 * Due corpi si sovrappongono se la distanza tra loro è
     	 * minore della somma dei loro raggi
     	 */

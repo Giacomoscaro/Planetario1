@@ -2,7 +2,7 @@ import it.kibo.fp.lib.InputData;
 import it.kibo.fp.lib.Menu;
 
 public class MenuPrincipale {
-    private final String[] scelte = {"Aggiungi un pianeta", "Aggiungi una luna", "Visualizza tutti i corpi", "Rimuovi la stella", "Rimuovi un pianeta", "Rimuovi una luna", "Visualizza un corpo a scelta", "Controlla se un corpo appartiene al sistema"};
+    private final String[] scelte = {"Aggiungi un pianeta", "Aggiungi una luna", "Visualizza tutti i corpi", "Rimuovi la stella", "Rimuovi un pianeta", "Rimuovi una luna", "Visualizza un corpo a scelta", "Controlla se un corpo appartiene al sistema", "Visualizza tutti i satelliti di un corpo"};
     private final Menu menu = new Menu("QUESTO É IL MENU PRINCIPALE", scelte, true, true, true);
 
 
@@ -41,6 +41,12 @@ public class MenuPrincipale {
                 case 8 -> {
                     String nome_corpo = InputData.readNonEmptyString("Quale corpo vuoi controllare che sia nel sistema?\n>", true);
                     p1.appartiene(nome_corpo);
+                }
+                case 9 -> {
+                    System.out.println(p1.getLista_corpi().get(0).getNome() + "\n");
+                    p1.stampa_pianeti();
+                    String nome_corpo = InputData.readNonEmptyString("Inserisci il corpo di cui vuoi vedere i satelliti", true);
+                    p1.toCorpo(nome_corpo).visualizza_satelliti();
                 }
                 default -> {
                 }
