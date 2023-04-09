@@ -185,4 +185,21 @@ public class Planetario {
             System.out.print(toCorpo(nome_corpo).toString());
         }
     }
+
+    /*
+    * La seguente funzione calcola il centro di massa nel sistema stellare
+    * Prima trova i dati necessari e poi svolge i calcoli
+    * Restituisce una Posizione con x e y del centro di massa
+     */
+    public Posizione CDM(){
+        double somma_masse=0;
+        double somma_x=0;
+        double somma_y=0;
+        for(Corpo corpo : lista_corpi){
+            somma_masse += corpo.getMassa();
+            somma_x += corpo.getMassa() * corpo.getPosizione().getX();
+            somma_y += corpo.getMassa() * corpo.getPosizione().getY();
+        }
+        return new Posizione(somma_x/somma_masse, somma_y/somma_masse);
+    }
 }
