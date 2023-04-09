@@ -161,4 +161,28 @@ public class Planetario {
         }
         return posizioneValida;
     }
+
+    /*
+    * Ti dice se un corpo è presente nel sistema solare
+    * in base al nome
+    * Se vero ti stampa le info, se falso ti avverte
+     */
+
+    public void appartiene(String nome_corpo){
+        boolean appartiene = false;
+
+        for (Corpo corpo : lista_corpi){
+            if (nome_corpo.equals(corpo.getNome())) {
+                appartiene = true;
+                break;
+            }
+        }
+
+        if (!appartiene)
+            System.out.println(nome_corpo + " non appartiene a questo sistema\n");
+        else{
+            System.out.println(nome_corpo + " appartiene a questo sistema:\n");
+            System.out.print(toCorpo(nome_corpo).toString());
+        }
+    }
 }
