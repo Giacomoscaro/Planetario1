@@ -22,7 +22,9 @@ public class Luna extends Corpo {
     	
     	if(getPadre() != null)
     		output.append("Satellite di :\t" + getPadre().getNome() + " : " + getPadre().getId() + "\n");
-    	
+
+		output.append("Percorso per raggiungerla :\t" + AnsiColors.YELLOW + getPadre().getPadre().getNome() + AnsiColors.RESET + " > " + AnsiColors.GREEN + getPadre().getNome() + AnsiColors.RESET + " > " + AnsiColors.PURPLE + getNome() + AnsiColors.RESET + "\n");
+
     	output.append(PrettyStrings.repeatChar('-', 40) + "\n\n");
     	
     	return output.toString();
