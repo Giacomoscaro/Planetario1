@@ -22,10 +22,6 @@ public class Planetario {
     public String getNome_sistema() {
         return nome_sistema;
     }
-
-    public void setNome_sistema(String nome_sistema) {
-        this.nome_sistema = nome_sistema;
-    }
     
     public void stampa_lista_corpi() {
     	for(Corpo corpo: lista_corpi) {
@@ -201,5 +197,68 @@ public class Planetario {
             somma_y += corpo.getMassa() * corpo.getPosizione().getY();
         }
         return new Posizione(somma_x/somma_masse, somma_y/somma_masse);
+    }
+
+    /*
+    * Fa selezionare due corpi all'utente, calcola la rotta ottimale
+    * secondo le regole stabilite e stampa le tappe della rotta e
+    * la sua lunghezza
+    * Non è il metodo più efficiente, ma fino a prova contraria funziona
+     */
+    public void calcolo_rotta() {
+        System.out.println("Scegli il corpo di partenza e il corpo d'arrivo dalla lista:\n");
+        for (Corpo corpo : lista_corpi)
+            System.out.println(corpo.getNome() + "\n"); //lista corpi tra cui scegliere
+        Corpo c1 = toCorpo(InputData.readNonEmptyString("partenza >\t", true));
+        Corpo c2 = toCorpo(InputData.readNonEmptyString("arrivo >\t", true));
+        StringBuffer rotta = new StringBuffer();
+        double lunghezza_rotta = 0;
+        if(c1.getPadre().equals(c2) || c2.getPadre().equals(c1)) {//se i due corpi sono adiacenti
+            rotta.append(c1.getNome() + " > " + c2.getNome());
+            lunghezza_rotta += c1.getPosizione().get_distanza(c2.getPosizione());
+        }
+        else if (c1.getClass().equals(Luna.class) && c2.getClass().equals(Luna.class)) {//se sono due lune ci sono solo due casi
+            rotta.append(c1.getNome());
+            if (c1.getPadre().equals(c2.getPadre())) {//stesso padre
+                rotta.append(" > " + c1.getPadre().getNome());
+                lunghezza_rotta += c1.getRaggio_orbita() + c2.getRaggio_orbita();
+            }
+            else {//padre diverso
+                rotta.append(" > " + c1.getPadre().getPadre().getNome());
+                lunghezza_rotta += c1.getPosizione().get_distanza(c1.getPadre().getPadre().getPosizione()) + c2.getPosizione().get_distanza(c2.getPadre().getPadre().getPosizione());
+            }
+            rotta.append(" > " + c2.getNome());
+        }
+        else if (c1.getClass().equals(Pianeta.class) && c2.getClass().equals(Pianeta.class)) {//due pianeti
+            rotta.append(c1.getNome() + " > " + c1.getPadre().getNome() + " > " + c2.getNome());
+            lunghezza_rotta += c1.getRaggio_orbita() + c2.getRaggio_orbita();
+        }
+        else {//i corpi non sono dello stesso tipo e non sono adiacenti
+            rotta.append(c1.getNome());
+
+            if (!c1.getClass().equals(Stella.class)) {//il corpo c1 non è la stella
+                rotta.append(" > " + c1.getPadre().getNome());
+                lunghezza_rotta += c1.getRaggio_orbita();
+                if (!c1.getPadre().getClass().equals(Stella.class)) {//c1 non è un pianeta
+                    rotta.append(" > " + c1.getPadre().getPadre().getNome());
+                    lunghezza_rotta += c1.getPadre().getRaggio_orbita();
+                    //c2 non può essere una luna, ma può essere un pianeta o una stella
+                    if (!c2.getClass().equals(Stella.class)) {//c2 è un pianeta
+                        rotta.append(" > " + c2.getNome());
+                        lunghezza_rotta += c2.getRaggio_orbita();
+                    }//se c2 è una stella è già tutto calcolato
+                }
+                else{//c1 è un pianeta e c2 non può essere un pianeta nè una stella, quindi è una luna
+                    rotta.append(" > " + c2.getPadre().getNome() + " > " + c2.getNome());
+                    lunghezza_rotta += c2.getPadre().getRaggio_orbita() + c2.getRaggio_orbita();
+                }
+            } else {//l'unica opzione rimasta è che c1 sia la stella
+                //c2 non può essere un pianeta, quindi è una luna
+                rotta.append(" > " + c2.getPadre().getNome());
+                rotta.append(" > " + c2.getNome());
+                lunghezza_rotta += c2.getPadre().getRaggio_orbita() + c2.getRaggio_orbita();
+            }
+        }
+        System.out.println("La rotta consigliata per viaggiare da " + c1.getNome() + " a " + c2.getNome() + " è : \n" + rotta + "\nE la lunghezza del viaggio sarà di " + AnsiColors.CYAN + lunghezza_rotta + AnsiColors.RESET);
     }
 }

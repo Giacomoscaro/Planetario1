@@ -225,7 +225,6 @@ public class Corpo {
                 return true;}
         else if( Posizione.distanza(c1.getPadre().getPosizione(), c2.getPadre().getPosizione()) <= c1.getRaggio_orbita() + c2.getRaggio_orbita() + c1.getRaggio_corpo() + c2.getRaggio_corpo() )
         return true;
-
         return false;
     }
     
