@@ -15,7 +15,7 @@ public class Stella extends Corpo {
     	output.append("Massa :\t" + getMassa() + "\n");
     	output.append("Raggio :\t" + getRaggio_corpo() + "\n");
     	
-    	if(getSatelliti().isEmpty() == false) {
+    	if(!getSatelliti().isEmpty()) {
     		output.append("Pianeti :\t" + "\n");
     		for(Corpo satellite: getSatelliti())
     			output.append("\t⊢ " + satellite.getNome() + " : " + satellite.getId() + "\n");

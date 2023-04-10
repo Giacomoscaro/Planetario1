@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Planetario {
     private ArrayList<Corpo> lista_corpi = new ArrayList<Corpo>(10);
-    private String nome_sistema;
+    private final String nome_sistema;
     public Planetario(String nome_sistema){
     this.nome_sistema = nome_sistema;
     }
@@ -105,8 +105,12 @@ public class Planetario {
     }
 
     public void rimuovi_stella(){
-        System.out.println("Hai deciso di rimuovere la stella dal tuo sistema solare, il che porterà ad una sua completa distruzione, addio " + this.getNome_sistema());
-        lista_corpi.clear();
+        System.out.println("Hai deciso di eliminare il tuo sistema stellare\n");
+        boolean sicuro = InputData.readYesOrNo(AnsiColors.PURPLE + "Ne sei davvero sicuro");
+        if(sicuro) {
+            lista_corpi.clear();
+            System.out.println(AnsiColors.RESET + "\nAddio " + getNome_sistema());
+        }
     }
 
     public void rimuovi_pianeta(Pianeta pianeta){
@@ -177,7 +181,7 @@ public class Planetario {
         if (!appartiene)
             System.out.println(nome_corpo + " non appartiene a questo sistema\n");
         else{
-            System.out.println(nome_corpo + " appartiene a questo sistema:\n");
+            System.out.println(nome_corpo + " appartiene a questo sistema\nEd ecco le sue informazioni:\n");
             System.out.print(toCorpo(nome_corpo).toString());
         }
     }

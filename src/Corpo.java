@@ -5,13 +5,13 @@ import it.kibo.fp.lib.PrettyStrings;
 
 public class Corpo {
 
-    private int id; //identificatore unico del corpo
-    private String nome;
+    private final int id; //identificatore unico del corpo
+    private final String nome;
     private Posizione posizione;
-    private double massa;
+    private final double massa;
     private double raggio_orbita;
-    private double raggio_corpo;
-    private Corpo padre;
+    private final double raggio_corpo;
+    private final Corpo padre;
     private ArrayList<Corpo> satelliti;
     private Posizione posizione_relativa;
     
@@ -61,9 +61,6 @@ public class Corpo {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public Posizione getPosizione() {
         return posizione;
@@ -77,9 +74,6 @@ public class Corpo {
         return massa;
     }
 
-    public void setMassa(double massa) {
-        this.massa = massa;
-    }
 
     public double getRaggio_orbita() {
         return raggio_orbita;
@@ -93,17 +87,11 @@ public class Corpo {
         return raggio_corpo;
     }
 
-    public void setRaggio_corpo(double raggio_corpo) {
-        this.raggio_corpo = raggio_corpo;
-    }
 
     public Corpo getPadre() {
         return padre;
     }
 
-    public void setPadre(Corpo padre) {
-        this.padre = padre;
-    }
     
     /**
      * Restituisce l'intera lista dei satelliti
@@ -217,15 +205,18 @@ public class Corpo {
     public static boolean collidono(Corpo c1, Corpo c2) {
     	/*
     	 * Due corpi possono collidere se
-    	 * la distanza tra loro è minore o uguale alla somma dei raggi orbitali 
+    	 * la distanza trai loro centri è minore o uguale alla somma dei raggi orbitali
     	 * (e della somma dei raggi dei corpi)
     	 */
-        if( c1.getPadre().equals(c2.getPadre()))
-        {if( Math.abs( c1.getRaggio_orbita() - c2.getRaggio_orbita()) <= c1.getRaggio_corpo() + c2.getRaggio_corpo())
-                return true;}
+        boolean collisione = false;
+        if(c1.getPadre().equals(c2) || c2.getPadre().equals(c1) ||  c1.getPadre().equals(c2.getPadre())){
+            //se i corpi sono adiacenti o hanno lo stesso padre collidono solo se la distanza tra loro è minore della somma dei raggi
+            if( Posizione.distanza(c1.getPosizione(), c2.getPosizione()) <= c1.getRaggio_corpo() + c2.getRaggio_corpo())
+                collisione = true;
+        }
         else if( Posizione.distanza(c1.getPadre().getPosizione(), c2.getPadre().getPosizione()) <= c1.getRaggio_orbita() + c2.getRaggio_orbita() + c1.getRaggio_corpo() + c2.getRaggio_corpo() )
-        return true;
-        return false;
+        collisione = true;
+        return collisione;
     }
     
     /**
@@ -239,8 +230,6 @@ public class Corpo {
     	 * Due corpi si sovrappongono se la distanza tra loro è
     	 * minore della somma dei loro raggi
     	 */
-    	if( Posizione.distanza(c1.getPosizione(), c2.getPosizione()) < c1.getRaggio_corpo() + c2.getRaggio_corpo() )
-    		return true;
-    	else return false;
+        return Posizione.distanza(c1.getPosizione(), c2.getPosizione()) < c1.getRaggio_corpo() + c2.getRaggio_corpo();
     }
 }

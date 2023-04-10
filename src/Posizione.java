@@ -1,7 +1,7 @@
 public class Posizione {
 
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
 
     public Posizione(double x, double y) {
         this.x = x;
@@ -12,16 +12,8 @@ public class Posizione {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public double getY() {
         return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public double get_distanza(Posizione p2){
