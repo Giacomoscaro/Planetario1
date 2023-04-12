@@ -250,26 +250,41 @@ public class Planetario {
      * Non è il metodo più efficiente, ma fino a prova contraria funziona
      */
     public void calcolo_rotta() {
-        System.out.println("Scegli il corpo di partenza e il corpo d'arrivo dalla lista:\n");
-        for (Corpo corpo : lista_corpi)
-            System.out.println(corpo.getNome() + "\n"); //lista corpi tra cui scegliere
-        Corpo c1 = toCorpo(InputData.readNonEmptyString("partenza >\t", true));
-        Corpo c2 = toCorpo(InputData.readNonEmptyString("arrivo >\t", true));
+        if (lista_corpi.size() == 1) {
+            System.out.println("Non è possibile fare la rotta con solamente la stella");
+            return;
+        }
+        ArrayList<Corpo> percorso;
+        Corpo c1;
+        Corpo c2;
+        do {
+
+            System.out.println("Scegli il corpo di partenza e il corpo d'arrivo dalla lista:\n");
+            for (Corpo corpo : lista_corpi)
+                System.out.println(corpo.getNome() + "\n"); //lista corpi tra cui scegliere
+            c1 = toCorpo(InputData.readNonEmptyString("partenza >\t", true));
+            c2 = toCorpo(InputData.readNonEmptyString("arrivo >\t", true));
+            percorso = percorso(c1, c2);
+            if(percorso.isEmpty()){
+                System.out.println("Sei già sul Corpo di arrivo");
+            }
+        }while (percorso.isEmpty());
         StringBuffer rotta = new StringBuffer();
+
         double lunghezza_rotta = 0;
-        ArrayList<Corpo> percorso = percorso(c1,c2);
 
         //calcolo lunghezza rotta
-        for(int i=0; i<percorso.size()-1; i++) {
-            lunghezza_rotta+= Posizione.distanza( percorso.get(i).getPosizione(), percorso.get(i+1).getPosizione() );
+        for (int i = 0; i < percorso.size() - 1; i++) {
+            lunghezza_rotta += Posizione.distanza(percorso.get(i).getPosizione(), percorso.get(i + 1).getPosizione());
         }
 
         //creazione StringBuffer rotta
-        for(int i=0; i<percorso.size()-1; i++) {
+        for (int i = 0; i < percorso.size() - 1; i++) {
             rotta.append(percorso.get(i).getNome() + " > ");
         }
-        rotta.append(percorso.get(percorso.size()-1).getNome() );
+        rotta.append(percorso.get(percorso.size() - 1).getNome());
 
         System.out.println("La rotta consigliata per viaggiare da " + c1.getNome() + " a " + c2.getNome() + " è : \n" + rotta + "\nE la lunghezza del viaggio sarà di " + AnsiColors.CYAN + lunghezza_rotta + AnsiColors.RESET);
+
     }
 }
