@@ -6,7 +6,11 @@ public class Stella extends Corpo {
     public Stella(String nome, double massa, double raggio_corpo) {
         super(nome, massa, raggio_corpo);
     }
-    
+
+	/**
+	 * Compone uno StringBuffer con tutte le informazioni della Stella concatenate
+	 * @return la String con tutte le informazioni della Stella
+	 */
     public String toString() {
     	StringBuffer output= new StringBuffer();
     	output.append("\t" + AnsiColors.YELLOW + "STELLA" + AnsiColors.RESET + " \n\n");

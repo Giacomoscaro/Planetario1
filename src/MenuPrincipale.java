@@ -3,19 +3,25 @@ import it.kibo.fp.lib.InputData;
 import it.kibo.fp.lib.Menu;
 
 public class MenuPrincipale {
-    private final String[] scelte = {"Menu Editor Corpi", "Menu Info Corpi", "Menu Funzionalità"};
+    private final String[] scelte = {"Editor Corpi", "Centro Informazioni", "Strumenti e Funzionalità"};
     private final String[] editor = {"Aggiungi un Pianeta", "Aggiungi una Luna", "Rimuovi un Pianeta", "Rimuovi una Luna"};
     private final String[] info = {"Visualizza tutti i Corpi", "Visualizza un Corpo a scelta", "Visualizza i Satelliti di un corpo", "Controllo che un corpo appartiente al Sistema"};
     private final String[] funzionalita = {"Calcola il centro di massa del Sistema", "Controlla le Collisioni", "Calcola le rotta migliore tra due corpi", "Resetta il Sistema"};
-    private final Menu menu = new Menu("QUESTO É IL MENU PRINCIPALE", scelte, true, true, true);
-    private final Menu m1 = new Menu("Editor", editor, true, true, true);
-    private final Menu m2 = new Menu("InfoCorpi", info, true, true, true);
-    private final Menu m3 = new Menu("Funzionalità", funzionalita, true, true, true);
+    private final Menu menu = new Menu(AnsiColors.BLUE + "MENU PRINCIPALE" + AnsiColors.RESET, scelte, true, true, true);
+    private final Menu m1 = new Menu(AnsiColors.YELLOW + "EDITOR CORPI" + AnsiColors.RESET, editor, true, true, true);
+    private final Menu m2 = new Menu(AnsiColors.CYAN + "CENTRO INFORMAZIONI" + AnsiColors.RESET, info, true, true, true);
+    private final Menu m3 = new Menu(AnsiColors.GREEN + "STRUMENTI E FUNZIONALITÀ" + AnsiColors.RESET, funzionalita, true, true, true);
 
     public MenuPrincipale() {
 
     }
+
+    /**
+     * Primo dei menu secondari. Permette di creare o distruggere corpi nel sistema.
+     * @param p1
+     */
     public void editor(Planetario p1) {
+        System.out.println("\n\n\n\n\n");
         int scelta = m1.choose();
         boolean principale;
             switch (scelta) {
@@ -37,12 +43,18 @@ public class MenuPrincipale {
                 }
             }
             principale = InputData.readYesOrNo("Vuoi tornare al menu principale?");
+            //TRUE riapre il menu principale; FALSE ti riapre l'editor
             if(principale)
                 interazione(p1);
             else editor(p1);
     }
 
+    /**
+     * Secondo dei menu secondari. Non modifica nulla nel sistema ma contiene tutte le informazioni utili
+     * @param p1
+     */
     public void info(Planetario p1) {
+        System.out.println("\n\n\n\n\n");
         int scelta = m2.choose();
         boolean principale;
         switch (scelta) {
@@ -66,7 +78,12 @@ public class MenuPrincipale {
         else info(p1);
     }
 
+    /**
+     * Terzo dei menu secondari. Permette di svolgere le funzioni più complesse del programma o di resettarlo
+     * @param p1
+     */
     public void funzionalita(Planetario p1) {
+        System.out.println("\n\n\n\n\n");
         int scelta = m3.choose();
         boolean principale;
         switch (scelta) {
@@ -89,7 +106,7 @@ public class MenuPrincipale {
             default ->{}
         }
         if (p1.getLista_corpi().size() == 0)
-            return;
+            return;//se il sistema viene resettato cessa di esistere, quindi il programma va terminato
 
         principale = InputData.readYesOrNo("Vuoi tornare al menu principale?");
         if(principale)
@@ -97,7 +114,12 @@ public class MenuPrincipale {
         else funzionalita(p1);
     }
 
+    /**
+     * Menu principale da cui scegliere a quale dei tre menu secondari accedere
+     * @param p1 planetario su cui agirai tramite il menu
+     */
     public void interazione(Planetario p1) {
+        System.out.println("\n\n\n\n\n");
             int scelt = menu.choose();
             switch (scelt) {
                 case 1 -> editor(p1);

@@ -6,10 +6,14 @@ public class Luna extends Corpo {
     public Luna(String nome, Posizione posizione, double massa, double raggio_corpo, Corpo padre) {
         super(nome, posizione, massa, raggio_corpo, padre);
 
-        this.setRaggio_orbita(this.getPosizione().get_distanza(this.getPadre().getPosizione()));
+        this.setRaggio_orbita(Posizione.distanza(this.getPosizione(), this.getPadre().getPosizione()));
 
     }
-    
+
+	/**
+	 * Compone uno StringBuffer con tutte le informazioni della Luna concatenate
+	 * @return la String con tutte le informazioni della Luna
+	 */
     public String toString() {
     	StringBuffer output= new StringBuffer();
     	output.append("\t" + AnsiColors.PURPLE + "LUNA" + AnsiColors.RESET + " \n\n");

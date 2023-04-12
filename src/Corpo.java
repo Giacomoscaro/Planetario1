@@ -13,7 +13,6 @@ public class Corpo {
     private final double raggio_corpo;
     private final Corpo padre;
     private ArrayList<Corpo> satelliti;
-    private Posizione posizione_relativa;
     
     
     private static int contatore=0;
@@ -61,7 +60,6 @@ public class Corpo {
         return nome;
     }
 
-
     public Posizione getPosizione() {
         return posizione;
     }
@@ -73,7 +71,6 @@ public class Corpo {
     public double getMassa() {
         return massa;
     }
-
 
     public double getRaggio_orbita() {
         return raggio_orbita;
@@ -87,11 +84,9 @@ public class Corpo {
         return raggio_corpo;
     }
 
-
     public Corpo getPadre() {
         return padre;
     }
-
     
     /**
      * Restituisce l'intera lista dei satelliti
@@ -100,66 +95,13 @@ public class Corpo {
         return satelliti;
     }
 
-    /**
-     * Cambia la lista di satelliti con una data
-     * @param satelliti la nuova lista di satelliti
-     */
-    public void setSatelliti(ArrayList<Corpo> satelliti) {
-        this.satelliti = satelliti;
-    }
-    
-    /** 
-     * Ritorna un satellite che ha l'id specificato
-     * 
-     * @param _id l'id del corpo da trovare
-     * @return	il satellite cercato
-     */
-    public Corpo getSatellite(int _id) {
-    	for(Corpo corpo : satelliti) {
-    		if(corpo.id ==_id)
-    			return corpo;
-    	}
-    	/* Ritornare null nel caso non trovi un corpo corrispondente
-    	 * Valutare se gestire questa cosa in modo diverso
-    	 */
-    	return null;
-    }
-    
-    /**
-     * Sostituisce un satellite con un corpo indicato
-     * 
-     * @param _corpo	il corpo da inserire al posto di quello già presente
-     * @param _id	l'indice del satellite da rimpiazzare
-     */
-    public void setSatellite(Corpo _corpo, int _id) {
-    	for(Corpo corpo : satelliti)
-    		if(corpo.id == _id) {
-    			corpo = _corpo; // da controllare
-    			System.out.println("Sostituzione con il corpo -> id: " + corpo.id);
-    		}
-    	
-    }
-
-    public static int getContatore() {
-        return contatore;
-    }
-
-    public static void setContatore(int contatore) {
-        Corpo.contatore = contatore;
-    }
-
-    public Posizione getPosizione_relativa() {
-        return posizione_relativa;
-    }
-
-    public void setPosizione_relativa(Posizione posizione_relativa) {
-        this.posizione_relativa = posizione_relativa;
-    }
-
     public void aggiungi_satellite(Corpo satellite){
         satelliti.add(satellite);
     }
 
+    /**
+     * Visualizza i dettagli di tutti i satelliti del corpo da cui viene chiamato il metodo
+     */
     public void visualizza_satelliti(){
         for(Corpo corpo: satelliti){
             System.out.println(corpo.toString());
@@ -172,8 +114,8 @@ public class Corpo {
      */
     public String toString() {
     	StringBuffer output= new StringBuffer();
-    	output.append("\t" + AnsiColors.WHITE + "CORPO" + AnsiColors.RESET + " \n\n");
-    	output.append("ID :\t" + id + "\n");
+        output.append("\t" + AnsiColors.WHITE + "CORPO" + AnsiColors.RESET + " \n\n");
+        output.append("ID :\t" + id + "\n");
     	output.append("Nome :\t" + nome + "\n");
     	output.append("Posizione :\t" + posizione.toString() + "\n");
     	output.append("Massa :\t\t" + massa + "\n");
